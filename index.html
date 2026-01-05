@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perkenalan Diri</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .background-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .bubble {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            animation: float 15s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) translateX(0);
+            }
+            25% {
+                transform: translateY(-20px) translateX(10px);
+            }
+            50% {
+                transform: translateY(-40px) translateX(-10px);
+            }
+            75% {
+                transform: translateY(-20px) translateX(10px);
+            }
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            overflow: hidden;
+            position: relative;
+            text-align: center;
+        }
+
+        .profile-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+        }
+
+        .name {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .title {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .section {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+            display: inline-block;
+        }
+
+        .about-text {
+            line-height: 1.6;
+            text-align: justify;
+        }
+
+        .reveal-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .reveal-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .skills-container {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .skill-category {
+            margin-bottom: 25px;
+        }
+
+        .category-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #ffeb3b;
+        }
+
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skill {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .skill.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .skill:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+        }
+
+        .contact-list {
+            list-style: none;
+        }
+
+        .contact-list li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .contact-list i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+            width: 25px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-5px);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 25px;
+            }
+            
+            .name {
+                font-size: 2rem;
+            }
+            
+            .profile-img {
+                width: 120px;
+                height: 120px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Animation -->
+    <div class="background-animation" id="backgroundAnimation"></div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="profile-section">
+            <img src="https://files.catbox.moe/06hkfm.jpg" alt="Foto Profil" class="profile-img">
+            <h1 class="name">ditthtzy</h1>
+            <p class="title">Programer struktur web/developer backend</p>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">Tentang Saya</h2>
+            <p class="about-text">
+                Halo! Saya faisal seorang full stack developer dengan pengalaman lebih dari 4 tahun dalam pengembangan website dan aplikasi web. 
+                Saya memiliki passion dalam menciptakan pengalaman digital yang menarik dan fungsional. 
+                Saya senang belajar teknologi baru dan selalu berusaha untuk meningkatkan keterampilan saya.
+            </p>
+        </div>
+
+        <button class="reveal-btn" id="revealBtn">
+            <i class="fas fa-arrow-down"></i> Klik di sini untuk melihat saya lebih dalam
+        </button>
+
+        <div class="skills-container" id="skillsContainer">
+            <div class="skill-category">
+                <h3 class="category-title">Frontend Development</h3>
+                <div class="skills-list">
+                    <div class="skill">HTML</div>
+                    <div class="skill">CSS</div>
+                    <div class="skill">JavaScript</div>
+                    <div class="skill">React</div>
+                    <div class="skill">Vue.js</div>
+                    <div class="skill">TypeScript</div>
+                    <div class="skill">SASS/SCSS</div>
+                    <div class="skill">Bootstrap</div>
+                </div>
+            </div>
+
+            <div class="skill-category">
+                <h3 class="category-title">Backend Development</h3>
+                <div class="skills-list">
+                    <div class="skill">Node.js</div>
+                    <div class="skill">Express.js</div>
+                    <div class="skill">PHP</div>
+                    <div class="skill">Laravel</div>
+                    <div class="skill">Python</div>
+                    <div class="skill">Django</div>
+                    <div class="skill">MySQL</div>
+                    <div class="skill">MongoDB</div>
+                </div>
+            </div>
+
+            <div class="skill-category">
+                <h3 class="category-title">Tools & Lainnya</h3>
+                <div class="skills-list">
+                    <div class="skill">Git</div>
+                    <div class="skill">Docker</div>
+                    <div class="skill">AWS</div>
+                    <div class="skill">Figma</div>
+                    <div class="skill">Adobe XD</div>
+                    <div class="skill">Photoshop</div>
+                    <div class="skill">Illustrator</div>
+                    <div class="skill">Agile/Scrum</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">Kontak</h2>
+            <ul class="contact-list">
+                <li><i class="fas fa-envelope"></i> faisalharis719@gmail.com</li>
+                <li><i class="fas fa-phone"></i> +6285166806273</li>
+                <li><i class="fas fa-map-marker-alt"></i> sulawesi tenggara, Indonesia</li>
+            </ul>
+        </div>
+
+        <div class="social-links">
+            <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+        </div>
+    </div>
+
+    <script>
+        // Membuat efek background dengan gelembung
+        document.addEventListener('DOMContentLoaded', function() {
+            const backgroundAnimation = document.getElementById('backgroundAnimation');
+            
+            for (let i = 0; i < 15; i++) {
+                const bubble = document.createElement('div');
+                bubble.classList.add('bubble');
+                
+                // Ukuran acak
+                const size = Math.random() * 100 + 50;
+                bubble.style.width = `${size}px`;
+                bubble.style.height = `${size}px`;
+                
+                // Posisi acak
+                bubble.style.left = `${Math.random() * 100}%`;
+                bubble.style.top = `${Math.random() * 100}%`;
+                
+                // Animasi dengan durasi acak
+                bubble.style.animationDuration = `${Math.random() * 20 + 10}s`;
+                bubble.style.animationDelay = `${Math.random() * 5}s`;
+                
+                backgroundAnimation.appendChild(bubble);
+            }
+
+            // Tombol reveal skills
+            const revealBtn = document.getElementById('revealBtn');
+            const skillsContainer = document.getElementById('skillsContainer');
+            const skills = document.querySelectorAll('.skill');
+            
+            revealBtn.addEventListener('click', function() {
+                // Toggle tampilan skills container
+                if (skillsContainer.style.display === 'block') {
+                    skillsContainer.style.display = 'none';
+                    revealBtn.innerHTML = '<i class="fas fa-arrow-down"></i> Klik di sini untuk melihat saya lebih dalam';
+                    
+                    // Reset animasi skill
+                    skills.forEach(skill => {
+                        skill.classList.remove('show');
+                    });
+                } else {
+                    skillsContainer.style.display = 'block';
+                    revealBtn.innerHTML = '<i class="fas fa-arrow-up"></i> Sembunyikan skill';
+                    
+                    // Animasi skill muncul bertahap
+                    skills.forEach((skill, index) => {
+                        setTimeout(() => {
+                            skill.classList.add('show');
+                        }, index * 100);
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
